@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#070914">
+<title>RG GAMER BOY FF — Access</title>
+<style>
+:root {
+  --bg:#070914;
+  --panel:rgba(17,22,42,.78);
+  --line:rgba(255,255,255,.10);
+  --text:#f7f8ff;
+  --muted:#9da5c4;
+  --accent:#ff6b2c;
+  --accent2:#ffb52e;
+  --green:#27d17f;
+  --shadow:0 20px 60px rgba(0,0,0,.42);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; min-height:100vh; color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(255,107,44,.20), transparent 30%),
+    radial-gradient(circle at 90% 15%, rgba(255,181,46,.12), transparent 28%),
+    linear-gradient(145deg,#05060d 0%,#0a0e1e 52%,#070914 100%);
+  overflow-x:hidden;
+}
+body:before,body:after{
+  content:""; position:fixed; width:260px;height:260px;border-radius:50%;
+  filter:blur(70px);opacity:.18;pointer-events:none;z-index:-1;
+}
+body:before{background:#ff5a1f;left:-130px;top:38%}
+body:after{background:#7b61ff;right:-150px;bottom:5%}
+.container{width:min(620px,100%);margin:auto;padding:18px 15px 42px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 2px 18px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand-icon{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+  font-size:20px;font-weight:900;
+  background:#050505;overflow:hidden;
+  box-shadow:0 10px 28px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.13);
+}
+.brand-icon img{width:100%;height:100%;object-fit:cover;display:block}.brand-name{font-size:15px;font-weight:900;letter-spacing:.7px}
+.brand-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.live{font-size:10px;color:#aeb6d5;border:1px solid var(--line);padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.035)}
+.live i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:5px;box-shadow:0 0 10px var(--green)}
+
+.hero{padding:10px 0 14px}
+.kicker{font-size:11px;font-weight:800;letter-spacing:1.7px;color:#ff9b70;text-transform:uppercase}
+.hero h1{font-size:clamp(28px,8vw,42px);line-height:1.04;margin:8px 0 9px;letter-spacing:-1.4px}
+.hero p{color:var(--muted);font-size:14px;line-height:1.65;margin:0;max-width:520px}
+
+.progress-box{margin:18px 0 12px}
+.progress-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);margin-bottom:8px}
+.progress-top strong{color:#fff}
+.progress{height:7px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden}
+.progress span{display:block;height:100%;width:20%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 0 18px rgba(255,107,44,.55);transition:width .5s ease}
+
+.card{
+  position:relative;overflow:hidden;background:var(--panel);backdrop-filter:blur(18px);
+  border:1px solid var(--line);border-radius:26px;padding:21px;box-shadow:var(--shadow);
+}
+.step-dots{display:flex;gap:6px;margin-top:9px}
+.step-dots i{height:4px;flex:1;border-radius:99px;background:rgba(255,255,255,.08);transition:.35s}
+.step-dots i.active{background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 0 12px rgba(255,107,44,.35)}
+.card:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.08),transparent 35%);pointer-events:none}
+.step-row{display:flex;justify-content:space-between;align-items:center;position:relative}
+.step-badge{font-size:11px;font-weight:900;letter-spacing:1px;color:#ffc09e;background:rgba(255,107,44,.11);border:1px solid rgba(255,107,44,.22);padding:7px 10px;border-radius:999px}
+.status{font-size:11px;color:var(--muted)}
+.card h2{font-size:24px;margin:18px 0 8px;letter-spacing:-.5px}
+.card p{font-size:13px;line-height:1.65;color:var(--muted);margin:0 0 17px}
+
+.ad{height:78px;border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;margin:14px 0 16px;background:#0a0c16}
+.ad img{width:100%;height:100%;object-fit:cover;display:block}
+
+.timer{
+  min-height:22px;text-align:center;color:#b9c0dc;font-size:12px;margin:12px 0;
+}
+.timer strong{color:#fff;font-size:15px}
+button,a.action{
+  width:100%;min-height:52px;border:0;border-radius:15px;padding:14px 16px;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  color:#fff;background:linear-gradient(135deg,#ff7434,#ff4e20);
+  font-weight:900;font-size:14px;text-decoration:none;cursor:pointer;
+  box-shadow:0 12px 28px rgba(255,88,32,.20);transition:transform .18s ease,filter .18s ease,background .18s ease;
+}
+button:hover,a.action:hover{filter:brightness(1.08);transform:translateY(-1px)}
+button:active,a.action:active{transform:scale(.985)}
+button:disabled{cursor:not-allowed;background:#343849;color:#777d96;box-shadow:none;transform:none}
+
+.note{font-size:10px;color:#69718d;text-align:center;margin-top:13px;line-height:1.5}
+
+.media{margin-top:22px}
+.media-card{padding:16px;border:1px solid var(--line);border-radius:22px;background:rgba(14,18,34,.72);box-shadow:var(--shadow)}
+.media-title{font-weight:900;font-size:14px;margin-bottom:11px}
+.media-img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:15px}
+.media-link{display:block;margin-top:10px;color:#ffb78f;font-size:11px;text-decoration:none;text-align:center}
+
+.success{text-align:center;padding:8px 0 2px}
+.success-icon{width:66px;height:66px;margin:0 auto 15px;border-radius:22px;display:grid;place-items:center;background:rgba(39,209,127,.12);border:1px solid rgba(39,209,127,.28);font-size:30px;animation:pop .45s ease both}
+.success h2{margin:0 0 7px}
+.success p{margin-bottom:18px}
+.restart{background:#303545!important;box-shadow:none!important;margin-top:10px}
+
+@keyframes pop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.brand-icon{animation:float 3s ease-in-out infinite}
+
+@media(max-width:420px){
+  .container{padding:14px 12px 34px}
+  .card{padding:17px;border-radius:22px}
+  .hero h1{font-size:31px}
+  .brand-icon img{width:100%;height:100%;object-fit:cover;display:block}.brand-name{font-size:13px}
+  .live{display:none}
+}
+
+/* RG GAMER BOY FF update-system test */
+.update-overlay{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.76);backdrop-filter:blur(5px)}
+.update-overlay.show{display:flex}
+.update-dialog{width:min(520px,100%);background:#151515;color:#f5f5f5;border-radius:22px;padding:24px 20px 20px;box-shadow:0 24px 90px #0009;border:1px solid #333;animation:updatePop .28s ease-out}
+@keyframes updatePop{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.update-dialog h2{font-size:22px;line-height:1.3;margin:0 0 10px;color:#fff}
+.update-dialog .update-sub{color:#c5c5c5;font-size:14px;margin:0 0 20px;line-height:1.5}
+.update-options{display:grid;gap:12px;margin:16px 0 22px}
+.update-option{display:flex;align-items:center;gap:13px;padding:10px 8px;color:#eee;font-size:14px;line-height:1.45}
+.update-option input{width:21px;height:21px;accent-color:#a7c7ff;flex-shrink:0}
+.update-option small{display:block;color:#aaa;font-size:12px}
+.update-btn{width:100%;min-height:52px;border:0;border-radius:999px;background:#a8c7fa;color:#10213c;font-weight:800;font-size:16px;cursor:pointer}
+.update-btn:disabled{opacity:.45;cursor:not-allowed}
+.update-meta{font-size:12px;color:#aaa;margin:0 0 18px}
+.update-progress-wrap{display:none;margin-top:20px}
+.update-progress-track{height:9px;border-radius:99px;background:#333;overflow:hidden;margin:10px 0}
+.update-progress-fill{height:100%;width:0;background:linear-gradient(90deg,#8ab4f8,#c4d7ff);transition:width .15s linear}
+.update-progress-label{display:flex;justify-content:space-between;font-size:13px;color:#ddd}
+.update-version{font-size:12px;color:#a8c7fa;margin-top:12px}
+.update-feature{display:none;margin-top:14px;padding:13px;border-radius:12px;background:#202a3a;border:1px solid #394c6b;font-size:13px;line-height:1.5}
+.update-feature.show{display:block}
+@media(prefers-reduced-motion:reduce){.update-dialog{animation:none}}
+
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="brand">
+      <div class="brand-icon"><img src="https://i.supaimg.com/d9c7f586-ce17-4c79-9667-6ede2824ff5b/fb332346-c385-4925-85ad-9b35cf8a10da.png" alt="RG GAMER BOY FF logo"></div>
+      <div>
+        <div class="brand-name">RG GAMER BOY FF</div>
+        <div class="brand-sub">Gaming • Updates • Downloads • Community</div>
+      </div>
+    </div>
+    <div class="live"><i></i>ACCESS ONLINE</div>
+  </header>
+
+  <section class="hero">
+    <div class="kicker">Secure access flow</div>
+    <h1>Complete the steps.<br>Enter the main page.</h1>
+    <p>Complete each step to continue to the next gaming page. The main website opens after Step 5.</p>
+  </section>
+
+  <div class="progress-box">
+    <div class="progress-top"><span>ACCESS PROGRESS</span><strong><span id="stepLabel">1</span> / 5</strong></div>
+    <div class="progress"><span id="progressBar"></span></div>
+    <div class="step-dots"><i class="active"></i><i></i><i></i><i></i><i></i></div>
+  </div>
+
+  <main class="card" id="card">
+    <div class="step-row">
+      <div class="step-badge" id="stepBadge">STEP 01</div>
+      <div class="status" id="status">Locked</div>
+    </div>
+
+    <h2 id="title">Step 1</h2>
+    <p id="description">Complete this step to continue to the next page.</p>
+
+    <div class="ad"><img src="https://i.supaimg.com/d9c7f586-ce17-4c79-9667-6ede2824ff5b/1a7ce4c6-6a57-4468-bf01-71ae5d0b4401.png" alt="Advertisement"></div>
+
+    <div class="timer" id="timer">Tap the button to start the 10-second test.</div>
+    <button id="unlock" onclick="handleStepButton()">UNLOCK STEP 1 <span>→</span></button>
+
+    <div class="note">No ad click is required.</div>
+  </main>
+
+  <section class="media">
+    <div class="media-card">
+      <div class="media-title">RG GAMER BOY FF • Gaming Video</div>
+      <a href="https://youtu.be/q6Efe1DrU-Y?si=mszAqAP-ri_qRkcM" target="_blank" rel="noopener noreferrer">
+        <img class="media-img" src="https://i.supaimg.com/d9c7f586-ce17-4c79-9667-6ede2824ff5b/e65bd442-1201-4f87-b2ae-3751d87aecd5.png" alt="RG GAMER BOY FF">
+      </a>
+      <a class="media-link" href="https://youtu.be/q6Efe1DrU-Y?si=mszAqAP-ri_qRkcM" target="_blank" rel="noopener noreferrer">Watch gaming video ↗</a>
+    </div>
+  </section>
+</div>
+
+
+<div class="update-overlay" id="updateOverlay" role="dialog" aria-modal="true" aria-labelledby="updateHeading">
+  <div class="update-dialog">
+    <h2 id="updateHeading">UPDATE NOW RG GAMER BOY FF WEBSITE</h2>
+    <p class="update-sub" id="updateMessage">A website update is available.</p>
+    <div class="update-meta">Update size: Small • Version <span id="updateVersion">1.0.1</span></div>
+    <div class="update-options">
+      <label class="update-option"><input type="radio" name="updateNetwork" value="any" checked><span>Now (over any network)<small>Data charges may apply</small></span></label>
+      <label class="update-option"><input type="radio" name="updateNetwork" value="wifi"><span>When Wi-Fi is available<small>Wi-Fi is required for this update</small></span></label>
+    </div>
+    <button class="update-btn" id="updateStart">UPDATE</button>
+    <div class="update-progress-wrap" id="updateProgressWrap">
+      <div class="update-progress-label"><span id="updateProgressText">Preparing update…</span><strong id="updatePercent">0%</strong></div>
+      <div class="update-progress-track"><div class="update-progress-fill" id="updateProgressFill"></div></div>
+      <p class="update-sub" id="updateProgressHint">Please keep this page open.</p>
+    </div>
+    <div class="update-feature" id="updateFeature"></div>
+    <div class="update-version" id="updateStatus">Updates are checked every 2 hours. Choose any network or Wi-Fi-only.</div>
+  </div>
+</div>
+
+<script>
+let step = 1;
+let unlocked = false;
+let interval;
+
+const titles = [
+  "Step 1",
+  "Step 2",
+  "Step 3",
+  "Step 4",
+  "Step 5"
+];
+
+const descriptions = [
+  "Welcome to the first page. Complete the timer to unlock Step 2.",
+  "Step 1 completed. Complete this page to unlock Step 3.",
+  "You are halfway through the access system. Complete this page to unlock Step 4.",
+  "Almost there! Complete this page to unlock the final step.",
+  "Final step! Complete the timer to unlock the Main Website."
+];
+
+function handleStepButton(){
+  const button = document.getElementById("unlock");
+  const timer = document.getElementById("timer");
+  const status = document.getElementById("status");
+
+  if(unlocked){
+    goNext({preventDefault:()=>{}});
+    return;
+  }
+
+  button.disabled = true;
+  let seconds = 10;
+  status.textContent = "Verifying…";
+  timer.innerHTML = "Please wait <strong>" + seconds + "s</strong>";
+
+  clearInterval(interval);
+  interval = setInterval(() => {
+    seconds--;
+
+    if(seconds > 0){
+      timer.innerHTML = "Please wait <strong>" + seconds + "s</strong>";
+    }else{
+      clearInterval(interval);
+      unlocked = true;
+      button.disabled = false;
+      button.className = "action";
+      button.innerHTML = step < 5 ? "GO TO NEXT STEP <span>→</span>" : "OPEN MAIN WEBSITE <span>→</span>";
+      button.style.display = "flex";
+      timer.textContent = "Step unlocked successfully.";
+      status.textContent = "Completed";
+    }
+  },1000);
+}
+
+function goNext(event){
+  event.preventDefault();
+  if(!unlocked) return;
+
+  if(step < 5){
+    step++;
+    document.getElementById("stepLabel").textContent = step;
+    document.getElementById("stepBadge").textContent = "STEP " + String(step).padStart(2,"0");
+    document.getElementById("progressBar").style.width = (step * 20) + "%";
+    document.querySelectorAll(".step-dots i").forEach((dot, index) => {
+      dot.classList.toggle("active", index < step);
+    });
+    document.getElementById("title").textContent = titles[step-1];
+    document.getElementById("description").textContent = descriptions[step-1];
+
+    const button = document.getElementById("unlock");
+    const timer = document.getElementById("timer");
+    const status = document.getElementById("status");
+
+    button.disabled = false;
+    button.className = "";
+    button.style.display = "flex";
+    button.innerHTML = "UNLOCK STEP " + step + " <span>→</span>";
+    timer.textContent = "Tap the button to start the 10-second test.";
+    status.textContent = "Locked";
+    unlocked = false;
+    window.scrollTo({top:0,behavior:"smooth"});
+  } else {
+    document.getElementById("card").innerHTML = `
+      <div class="success">
+        <div class="success-icon">✓</div>
+        <h2>Access Complete</h2>
+        <p>All 5 steps are complete. You can now enter the main website.</p>
+        <div class="ad"><img src="https://i.supaimg.com/d9c7f586-ce17-4c79-9667-6ede2824ff5b/1a7ce4c6-6a57-4468-bf01-71ae5d0b4401.png" alt="Advertisement"></div>
+        <a class="action" href="https://mega.nz/file/8QxDhRLL#wgLt1N4zltt6Msp1heg3ADk6gxU3wLqZOb_LpYOBooo" target="_blank" rel="noopener">OPEN MAIN WEBSITE →</a>
+        <button class="action restart" onclick="location.reload()">RESTART TEST</button>
+      </div>`;
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+}
+
+// Update simulation: two-hour interval, user-selected network policy, and a feature notice every five successful updates.
+(function(){
+  const KEY='rgff_update_state_v1';
+  const TWO_HOURS=2*60*60*1000;
+  const FEATURE_NAMES=[
+    'New Quick Access panel added.',
+    'New Gaming Updates section added.',
+    'New Website Tips card added.',
+    'New interface enhancement added.',
+    'New community feature preview added.'
+  ];
+  let state;
+  try { state=JSON.parse(localStorage.getItem(KEY)||'null'); } catch(e) { state=null; }
+  if(!state || typeof state.lastUpdateCheck!=='number'){
+    state={versionParts:[1,0,0], successfulUpdates:0, lastUpdateCheck:Date.now()};
+    save();
+  }
+  function save(){ try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){} }
+  function version(){return state.versionParts.join('.');}
+  function wifiAvailable(){
+    const c=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
+    if(!c) return false; // Browser cannot confirm Wi-Fi: fail closed.
+    if(c.type==='wifi') return true;
+    if(c.effectiveType && c.type!=='wifi') return false;
+    return false;
+  }
+  const overlay=document.getElementById('updateOverlay');
+  const start=document.getElementById('updateStart');
+  const status=document.getElementById('updateStatus');
+  const msg=document.getElementById('updateMessage');
+  const progressWrap=document.getElementById('updateProgressWrap');
+  const fill=document.getElementById('updateProgressFill');
+  const pct=document.getElementById('updatePercent');
+  const progressText=document.getElementById('updateProgressText');
+  const hint=document.getElementById('updateProgressHint');
+  const feature=document.getElementById('updateFeature');
+  const versionLabel=document.getElementById('updateVersion');
+  let progressTimer=null, pending=false;
+  function showNotice(){
+    if(pending) return;
+    pending=true;
+    versionLabel.textContent=nextVersion();
+    msg.textContent='Choose whether to update now using any network or wait until Wi-Fi is connected.';
+    progressWrap.style.display='none'; start.style.display='block'; start.disabled=false;
+    feature.classList.remove('show'); feature.textContent='';
+    overlay.classList.add('show');
+    checkNetwork();
+  }
+  function nextVersion(){
+    const v=state.versionParts.slice();
+    v[2]=(v[2]||0)+1;
+    return v.join('.');
+  }
+  function selectedChoice(){
+    return document.querySelector('input[name="updateNetwork"]:checked');
+  }
+  function checkNetwork(){
+    const wifi=wifiAvailable();
+    const choice=selectedChoice();
+    // Any-network mode can start on mobile data or Wi-Fi. Wi-Fi mode requires browser-confirmed Wi-Fi.
+    start.disabled=!!(choice && choice.value==='wifi' && !wifi);
+    if(!choice){ status.textContent='Choose a network option to continue.'; }
+    else if(choice.value==='any'){
+      status.textContent='Any network selected. UPDATE can start using mobile data or Wi-Fi.';
+    } else {
+      status.textContent=wifi?'Wi-Fi detected. UPDATE can start.':'Waiting for Wi-Fi. Connect your phone to Wi-Fi; this browser must be able to detect it.';
+    }
+  }
+  document.querySelectorAll('input[name="updateNetwork"]').forEach(el=>el.addEventListener('change',checkNetwork));
+  const connection=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
+  if(connection && connection.addEventListener) connection.addEventListener('change',checkNetwork);
+  start.addEventListener('click',()=>{
+    const choice=selectedChoice();
+    if(!choice){ status.textContent='Choose a network option first.'; return; }
+    if(choice.value==='wifi' && !wifiAvailable()){
+      status.textContent='Waiting for Wi-Fi. Connect to Wi-Fi and try again.';
+      start.disabled=true; return;
+    }
+    const wifiOnly=choice.value==='wifi';
+    start.disabled=true; progressWrap.style.display='block';
+    let n=0; progressText.textContent='Downloading update…'; hint.textContent=wifiOnly?'Keep Wi-Fi connected and keep this page open.':'Keep this page open. Mobile data or Wi-Fi can be used.';
+    clearInterval(progressTimer);
+    progressTimer=setInterval(()=>{
+      if(wifiOnly && !wifiAvailable()){
+        clearInterval(progressTimer); progressTimer=null;
+        progressText.textContent='Update paused'; hint.textContent='Wi-Fi disconnected or cannot be detected. Reconnect to Wi-Fi, then select UPDATE again.';
+        checkNetwork(); return;
+      }
+      n=Math.min(100,n+1); fill.style.width=n+'%'; pct.textContent=n+'%';
+      if(n>=100){
+        clearInterval(progressTimer); progressTimer=null;
+        state.successfulUpdates++;
+        state.versionParts[2]=(state.versionParts[2]||0)+1;
+        state.lastUpdateCheck=Date.now(); save();
+        progressText.textContent='Update complete'; hint.textContent='Version '+version()+' is ready.';
+        status.textContent='Successful updates: '+state.successfulUpdates;
+        if(state.successfulUpdates%5===0){
+          const featureIndex=(Math.floor(state.successfulUpdates/5)-1)%FEATURE_NAMES.length;
+          feature.textContent='✨ NEW FEATURE • '+FEATURE_NAMES[featureIndex]+' (Feature milestone '+(state.successfulUpdates/5)+')';
+          feature.classList.add('show');
+        } else {
+          feature.textContent='Update installed successfully.';
+          feature.classList.add('show');
+        }
+        start.textContent='DONE'; start.disabled=false;
+        start.onclick=null;
+        start.addEventListener('click',()=>{overlay.classList.remove('show');pending=false;start.textContent='UPDATE';start.disabled=false;start.style.display='block';progressWrap.style.display='none';}, {once:true});
+      }
+    },200);
+  });
+  // Keep the two-hour timer independent of reloads using the saved timestamp.
+  setInterval(()=>{
+    if(!pending && Date.now()-state.lastUpdateCheck>=TWO_HOURS) showNotice();
+  },5000);
+  // For a fresh visit, first notice is due two hours after this page initializes.
+  checkNetwork();
+})();
+
+</script>
+</body>
+</html>
